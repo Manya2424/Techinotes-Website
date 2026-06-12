@@ -28,9 +28,9 @@ MAILTRAP_INBOX_ID = os.getenv("MAILTRAP_INBOX_ID", "").strip()
 SECRET_KEY = 'django-insecure-_=$5(6)*ax+=#0v_a-a9*h%6&er1rbp1#qqbardsp1omo@i_@h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://techinotes-website.onrender.com/']
 
 
 # Application definition
