@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container">
+ 
+    <div class="note-card">
+
+        <h2>Create Note 🌿</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button class="btn btn-custom">
+                Save Note
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+{% comment %} <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Save Note</button>
+</form> {% endcomment %}
+
+{% endblock body %}

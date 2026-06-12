@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% block title %}Createuser{% endblock title %}
+{% block body %}
+<div class="container mb-3 py-4">
+    {% if messages %}
+        {% for message in messages %}  
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endfor %}
+    {% endif %}
+    <h1 class="text-center">Create User</h1>
+
+    <form id="signup-form" method="post" action="{% url 'createuser' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="name" class="form-label">UserName</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your username">
+            <small id="username-message"></small>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter your mail">
+            <small id="email-message"></small>
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone No.</label>
+            <input type="phone" class="form-control" id="phone" name="phone" placeholder="Enter your contact">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password">
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+        {% comment %} <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div> {% endcomment %}
+    </form>
+    <p>
+    Already have an account?
+    <a href="{% url 'loginuser' %}">Login</a>
+    </p>
+</div>
+<script>
+
+const usernameInput =
+    document.getElementById("name");
+
+
+const message =
+    document.getElementById("username-message");
+
+
+usernameInput.addEventListener(
+    "keyup",
+    function(){
+
+        fetch(
+            `/accounts/check-username/?name=${this.value}`
+        )
+
+        .then(response => response.json())
+
+        .then(data => {
+
+            if(data.exists){
+
+                message.innerHTML =
+                    "❌ Username already taken";
+
+                message.style.color = "red";
+            }
+
+            else{
+
+                message.innerHTML =
+                    "✅ Username available";
+
+                message.style.color = "green";
+            }
+
+        });
+
+    }
+);
+</script>
+<script>
+
+const emailInput =
+    document.getElementById("email");
+
+const message2 =
+    document.getElementById("email-message");
+
+emailInput.addEventListener(
+    "keyup",
+    function(){
+
+        fetch(
+            `/accounts/check-email/?email=${this.value}`
+        )
+
+        .then(response => response.json())
+
+        .then(data => {
+
+            if (data.exists) {
+
+                message2.innerHTML =
+                    "❌ Email already registered";
+
+                message2.style.color = "red";
+
+            } else {
+
+                message2.innerHTML =
+                    "";
+
+                message2.style.color = "green";
+
+            }
+
+        });
+
+    }
+);
+
+</script>
+<script>
+
+document.getElementById("signup-form")
+.addEventListener("submit", function(event){
+
+    const usernameError =
+        document.getElementById("username-message")
+        .textContent;
+
+    const emailError =
+        document.getElementById("email-message")
+        .textContent;
+
+    if (
+        usernameError.includes("taken") ||
+        emailError.includes("registered")
+    ){
+
+        event.preventDefault();
+
+        alert(
+            "Please fix the errors before submitting."
+        );
+    }
+
+});
+
+</script>
+{% endblock body %}

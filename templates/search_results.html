@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container py-5">
+
+    <h1 class="text-center">
+        🔍 Search Results
+    </h1>
+
+    <p class="text-center">
+        Results for "{{ query }}"
+    </p>
+
+    <div class="row justify-content-center">
+
+        {% for note in results %}
+
+        <div class="col-md-5 mb-4">
+
+            <div class="note-card">
+
+                <h3>📒 {{ note.title }}</h3>
+
+                <p>{{ note.content }}</p>
+
+                <small>
+                    {{ note.created_at }}
+                </small>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="text-center mt-5">
+
+            <h3>🌿 No matching notes found</h3>
+
+            <p>
+                Try another title.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock body %}

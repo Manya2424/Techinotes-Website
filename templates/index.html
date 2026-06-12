@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+{% block body %}
+
+<div class="hero-section">
+
+      
+<div class="left-image">
+
+    <img src="{% static 'img/notesimg.png' %}"
+         alt="Notebook"
+    >
+</div>
+    <div  class="hero-content">    <h1 class="display-3">
+             TechiNotes                             
+        </h1>
+<p class="lead">
+            Your Cozy Digital Notebook
+        </p>
+
+        <p>
+            Capture ideas, study notes and little thoughts.
+        </p>
+    
+        <a href="{% url 'create_note' %}" class="btn btn-custom">
+            Start Writing ✨
+        </a>
+    </div>
+
+    <div class="right-image">
+          <img src="{% static 'img/notesimg5.avif' %}"
+         alt="Notebook2"
+          >
+</div> 
+        
+    </div>
+
+    {% if user.is_authenticated %}
+
+    <div class="row">
+
+        <!-- Create Notes -->
+      <div class="row justify-content-center mt-5">
+
+    <div class="col-md-5 mb-4">
+        <div class="feature-card text-center">
+
+            <div class="feature-icon">
+                📒
+            </div>
+
+            <h3>Create Note</h3>
+
+            <p>
+                Write down ideas, study notes and thoughts.
+            </p>
+
+            <a href="{% url 'create_note' %}" class="btn btn-custom">
+                Start Writing
+            </a>
+
+        </div>
+    </div>
+
+    <div class="col-md-5 mb-4">
+        <div class="feature-card text-center">
+
+            <div class="feature-icon">
+                📚
+            </div>
+
+            <h3>My Notes</h3>
+
+            <p>
+                Browse and organize your saved notes.
+            </p>
+
+            <a href="{% url 'notes' %}" class="btn btn-custom">
+                Open Notes
+            </a>
+
+        </div>
+    </div>
+
+</div>
+
+
+       
+
+    </div>
+
+    {% else %}
+
+    <div class="text-center">
+        <h3>Please Login to Continue</h3>
+
+       <a href="{% url 'loginuser' %}" class="btn btn-primary m-2">
+    Login
+</a>
+
+        {% comment %} <a href="{% url 'createuser' %}" class="btn btn-success m-2">
+            Create Account
+        </a> {% endcomment %}
+    </div>
+
+    {% endif %}
+</div>
+{% endblock body %}

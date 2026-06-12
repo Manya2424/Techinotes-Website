@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="container mt-5">
+    <h2>Edit Note</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label>Title</label>
+            <input
+                type="text"
+                name="title"
+                class="form-control"
+                value="{{ note.title }}"
+            >
+        </div>
+
+        <div class="mb-3">
+            <label>Content</label>
+            <textarea
+                name="content"
+                class="form-control"
+                rows="8"
+            >{{ note.content }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Save Changes
+        </button>
+    </form>
+</div>
+
+{% endblock body %}
