@@ -30,9 +30,11 @@ SECRET_KEY = 'django-insecure-_=$5(6)*ax+=#0v_a-a9*h%6&er1rbp1#qqbardsp1omo@i_@h
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://techinotes-website.onrender.com/']
+ALLOWED_HOSTS = ['techinotes-website.onrender.com']
 
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://techinotes-website.onrender.com",
+]
 # Application definition
 
 INSTALLED_APPS = [
